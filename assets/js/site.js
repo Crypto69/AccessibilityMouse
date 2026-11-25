@@ -26,7 +26,8 @@ async function releaseLinks() {
       const url = urls[a.dataset.dl];
       if (url) a.href = url;
     });
-    const version = (release.tag_name || '').replace(/^v/i, '');
+    // The release's title names both versions, e.g. "Mac 1.1.3 · Windows 1.0.3".
+    const version = release.name || (release.tag_name || '').replace(/^v/i, '');
     if (version) {
       document.querySelectorAll('[data-version]').forEach((el) => { el.textContent = `Latest: ${version}.`; });
     }
